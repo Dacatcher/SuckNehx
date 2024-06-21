@@ -12,15 +12,6 @@
 scripted = Nehx
 ]]
 
-Stuff = {
-	FOV = 70;
-	Key = Enum.KeyCode.E;
-	Discord = 'discord.gg/96uPykzT'
-	 
-}
-
-
-
 
 local UIS = game:GetService("UserInputService")
 local Players = game:GetService("Players")
@@ -33,7 +24,7 @@ local isLocked = false
 
 
 local function getNearestPlayerInFOV()
-	local closestDistance = table.find(Stuff.FOV)
+	local closestDistance = 70
 	local closestPlayer = nil
 
 	for _, player in pairs(Players:GetPlayers()) do
@@ -57,7 +48,7 @@ end
 UIS.InputBegan:Connect(function(input, gameProcessedEvent)
 	if gameProcessedEvent then return end
 
-	if input.KeyCode == table.find(Stuff.Key) then 
+	if input.KeyCode == Enum.Keycode.E then 
 		if isLocked then
 			isLocked = false
 			targetPlayer = nil
